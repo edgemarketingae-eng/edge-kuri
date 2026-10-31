@@ -6,6 +6,9 @@ Gamified monthly Kuri (chitti) draw for Edge Trading Academy.
 - Spinning wheel with tick sounds, 3-2-1 suspense countdown, confetti and winner card
 - Winners leave the wheel automatically; one winner per round until everyone has received the Kuri
 - Winners history with date/time (GST), Undo, Copy results, New cycle
+- Member photos on the wheel, chips, history and the winner card (`assets/photos/<name>.jpg`, lowercase)
+- Festival winner moment: crown, light garland, fireworks, confetti and a random song (no repeats until all have played) from `assets/music/`
+- Funny Manglish suspense lines while spinning, plus a fun line and an inspiration quote for every winner
 - Edit members from the **Members** button
 - Fair draw: uses `crypto.getRandomValues` (unbiased)
 - Results are saved in the browser on the device used for the draw

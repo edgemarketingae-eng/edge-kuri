@@ -173,6 +173,59 @@ dialog textarea{width:100%;min-height:240px;border-radius:14px;border:1px solid 
 dialog textarea:focus{border-color:var(--green)}
 dialog .row{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
 dialog .btn-primary{width:auto;padding:12px 24px;margin:0}
+/* avatars */
+.av{width:26px;height:26px;border-radius:50%;object-fit:cover;flex:none;border:2px solid var(--emerald);background:var(--pine)}
+.av-txt{display:grid;place-items:center;font-size:11px;font-weight:800;color:var(--ink);background:var(--mint)}
+.chip{padding:5px 14px 5px 5px}
+.chip.won .av{filter:grayscale(1) opacity(.5);border-color:var(--green)}
+.hist .rn{position:relative}
+.hist .hav{width:44px;height:44px;border-radius:14px;object-fit:cover;border:2px solid var(--green)}
+.hist li{grid-template-columns:44px 44px 1fr auto}
+
+/* suspense ticker */
+.ticker{min-height:26px;text-align:center;margin-top:14px;font-weight:700;font-size:15px;color:var(--green);transition:opacity .25s}
+.ticker.fade{opacity:0}
+
+/* festival winner card */
+.win-card{overflow:hidden;padding-top:58px}
+.rays{position:absolute;left:50%;top:205px;width:900px;height:900px;margin:-450px 0 0 -450px;pointer-events:none;opacity:.35;
+  background:repeating-conic-gradient(from 0deg,rgba(8,225,134,.35) 0 8deg,transparent 8deg 20deg);
+  -webkit-mask:radial-gradient(circle,#000 0,transparent 65%);mask:radial-gradient(circle,#000 0,transparent 65%);animation:rot 18s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.lights{position:absolute;left:0;right:0;top:0;height:40px;display:flex;justify-content:space-around;pointer-events:none}
+.lights::before{content:"";position:absolute;left:-5%;right:-5%;top:-30px;height:46px;border-bottom:2px solid rgba(190,235,234,.35);border-radius:0 0 50% 50%}
+.lights i{position:relative;width:12px;height:16px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;margin-top:10px;animation:blink 1s infinite alternate}
+.lights i:nth-child(4n+1){background:#08E186;box-shadow:0 0 12px #08E186}
+.lights i:nth-child(4n+2){background:#FFD166;box-shadow:0 0 12px #FFD166;animation-delay:.25s}
+.lights i:nth-child(4n+3){background:#F1F7F7;box-shadow:0 0 12px #F1F7F7;animation-delay:.5s}
+.lights i:nth-child(4n){background:#FF6B6B;box-shadow:0 0 12px #FF6B6B;animation-delay:.75s}
+.lights i:nth-child(odd){margin-top:16px}
+@keyframes blink{from{opacity:.25;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+.photo-ring{position:relative;width:200px;height:200px;margin:0 auto 16px;border-radius:50%;padding:7px;
+  background:conic-gradient(#08E186,#BEEBEA,#FFD166,#08E186,#03624C,#08E186);animation:rot 4s linear infinite;
+  box-shadow:0 0 50px rgba(8,225,134,.55)}
+.photo-ring img,.photo-ring .big-txt{width:100%;height:100%;border-radius:50%;object-fit:cover;border:5px solid var(--ink);animation:rot 4s linear infinite reverse;background:var(--pine)}
+.big-txt{display:grid;place-items:center;font-family:var(--display);font-stretch:125%;font-weight:900;font-size:64px;color:var(--green)}
+.crown{position:absolute;top:-34px;left:50%;font-size:46px;transform:translateX(-50%) rotate(-8deg);animation:crown 1.4s ease-in-out infinite;z-index:2}
+@keyframes crown{50%{transform:translateX(-50%) translateY(-6px) rotate(8deg)}}
+.photo-wrap{position:relative;width:200px;margin:0 auto}
+.win-title{display:inline-block;background:var(--pill);color:var(--ink);font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+  padding:6px 14px;border-radius:999px;border:1px solid var(--ink);margin-bottom:8px}
+.win-name{margin:4px 0 8px}
+.win-fun{font-size:18px;font-weight:800;color:var(--off);margin-bottom:6px}
+.win-quote{font-size:14px;font-style:italic;color:var(--mint);margin-bottom:12px}
+.win-meta{margin-bottom:18px;font-size:13px}
+.music-bar{display:inline-flex;align-items:center;gap:8px;background:rgba(2,26,26,.6);border:1px solid rgba(190,235,234,.2);
+  border-radius:999px;padding:6px 8px 6px 14px;margin-bottom:20px;font-size:13px;font-weight:700;color:var(--mint)}
+.eq{display:inline-flex;gap:2px;align-items:flex-end;height:14px}
+.eq b{width:3px;background:var(--green);border-radius:2px;animation:eq .8s infinite ease-in-out}
+.eq b:nth-child(2){animation-delay:.2s}.eq b:nth-child(3){animation-delay:.4s}.eq b:nth-child(4){animation-delay:.1s}
+.paused .eq b{animation-play-state:paused;height:3px!important}
+@keyframes eq{0%,100%{height:3px}50%{height:14px}}
+.music-bar button{background:rgba(190,235,234,.1);color:var(--off);width:30px;height:30px;border-radius:50%;font-size:13px}
+.music-bar button:hover{background:var(--green);color:var(--ink)}
+.win-card{max-height:calc(100vh - 32px);overflow-y:auto}
+@media(max-width:520px){.photo-ring,.photo-wrap{width:150px;height:150px}.photo-wrap{height:auto}.rays{top:180px}.win-card{padding:50px 18px 24px}}
 @media(max-width:520px){
   header img{height:26px}.icon-btn{padding:8px 11px;font-size:12px}
   .card{padding:18px;border-radius:22px}.btn-spin{padding:16px 34px;font-size:15px}
@@ -242,6 +295,7 @@ dialog .btn-primary{width:auto;padding:12px 24px;margin:0}
       <div class="spin-row">
         <button class="btn-spin" id="spinBtn">🎯 Spin the Kuri</button>
       </div>
+      <div class="ticker" id="ticker">Who will take the Kuri this month? 🤔</div>
       <div class="hint">Press <kbd>Space</kbd> to spin · winners leave the wheel automatically</div>
       <div id="doneBanner" class="done-banner hidden">🏆 All members have received the Kuri. Start a new cycle from History.</div>
     </section>
@@ -278,10 +332,23 @@ dialog .btn-primary{width:auto;padding:12px 24px;margin:0}
 
 <div id="overlay" class="hidden">
   <div class="win-card">
-    <div class="trophy">🏆</div>
-    <span class="eyebrow" id="winRound">Round 1 winner</span>
+    <div class="rays"></div>
+    <div class="lights"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="photo-wrap">
+      <span class="crown">👑</span>
+      <div class="photo-ring" id="winPhoto"></div>
+    </div>
+    <span class="win-title" id="winTitle">Round 1</span>
+    <span class="eyebrow" id="winRound" style="display:block">Kuri winner</span>
     <div class="win-name display" id="winName">—</div>
+    <div class="win-fun" id="winFun"></div>
+    <div class="win-quote" id="winQuote"></div>
     <div class="win-meta" id="winMeta"></div>
+    <div class="music-bar" id="musicBar">
+      <span class="eq"><b></b><b></b><b></b><b></b></span><span id="musicLbl">Party music</span>
+      <button id="musicToggle" title="Pause / play music">⏸</button>
+      <button id="musicNext" title="Another song">⏭</button>
+    </div>
     <div class="win-actions">
       <button class="btn-ghost" id="shareBtn">📋 Copy announcement</button>
       <button class="btn-primary" id="closeWin">Continue</button>
@@ -292,7 +359,7 @@ dialog .btn-primary{width:auto;padding:12px 24px;margin:0}
 
 <dialog id="namesDlg">
   <h2 class="display">Members</h2>
-  <p>One name per line. Changing the list starts a fresh cycle and clears history.</p>
+  <p>One name per line. Changing the list starts a fresh cycle and clears history. Photos are matched by name from <b>assets/photos/name.jpg</b>; anyone without a photo gets their initial.</p>
   <textarea id="namesTxt"></textarea>
   <div class="row">
     <button class="btn-ghost" id="namesCancel">Cancel</button>
@@ -334,14 +401,86 @@ dialog .btn-primary{width:auto;padding:12px 24px;margin:0}
   $("#logoutBtn").onclick = () => { try{ sessionStorage.removeItem(SKEY); localStorage.removeItem(SKEY);}catch(e){} location.reload(); };
 
   // ---------- STATE ----------
-  const DEFAULT = ["Jazeel","Musthafa","Sreehari","Sherin","Hiba","Basith","Vaishna","Jihad","Adhila","Prijesh"];
-  let names = store.get("edgekuri.names", DEFAULT);
-  let history = store.get("edgekuri.history", []);   // [{name, round, ts}]
-  let soundOn = store.get("edgekuri.sound", true);
+  const DEFAULT = ["Basith","Musthafa","Vaishna","Sreehari","Prijesh","Sareed","Jazeel","Sherin","Hiba","Jihad"];
+  const V = "edgekuri.v2.";
+  let names = store.get(V+"names", DEFAULT);
+  let history = store.get(V+"history", []);   // [{name, round, ts}]
+  let soundOn = store.get(V+"sound", true);
   let angle = 0, spinning = false, inited = false;
 
   const remaining = () => names.filter(n => !history.some(h => h.name === n));
-  const save = () => { store.set("edgekuri.names", names); store.set("edgekuri.history", history); };
+  const save = () => { store.set(V+"names", names); store.set(V+"history", history); };
+
+  // ---------- PHOTOS ----------
+  const PHOTO_SRC = n => `assets/photos/${n.toLowerCase().replace(/[^a-z0-9]/g,"")}.jpg`;
+  const imgs = {};
+  function loadPhotos(){
+    names.forEach(n => {
+      if (imgs[n]) return;
+      const im = new Image(); im.onload = () => { im.ok = true; draw(); }; im.onerror = () => { im.ok = false; };
+      im.src = PHOTO_SRC(n); imgs[n] = im;
+    });
+  }
+  const initials = n => n.trim().slice(0,1).toUpperCase();
+  const avatarHTML = (n, cls="av") => imgs[n] && imgs[n].ok === false
+    ? `<span class="${cls} av-txt">${esc(initials(n))}</span>`
+    : `<img class="${cls}" src="${PHOTO_SRC(n)}" alt="" loading="lazy" onerror="this.outerHTML='<span class=&quot;${cls} av-txt&quot;>${esc(initials(n))}</span>'">`;
+
+  // ---------- FUN LINES ----------
+  const TICKS = [
+    "Bhagyam load aavunnu… ⏳","Kuri devathaye vilikkunnu… 🙏","Aarude veettil aanu party? 🎉",
+    "No chart, no indicator — pure luck 📈","Stop loss illa, take profit maathram 💸","Calculating destiny…",
+    "EMI ellam kaathu nilkkunnu… 😅","Biriyani treat aarudethu? 🍛","Wheel thinking… don't blink 👀",
+    "Patience pays — every trader knows 🧘","Almost… almost… 🥁","Aaru jayikkum? Guess cheyyu! 🤔"
+  ];
+  const FUN = [
+    "Kuri adichu! Party evide? 🍗","Profit booked! Treat venam 🎂","Bhagyam ningale thedi vannu! ✨",
+    "Biriyani treat confirmed? 🍛","Pocket full, heart fuller 💚","Ee maasam ningalude maasam! 🔥",
+    "Jackpot! Office muzhuvan witness 😎","Mass entry! Kayyadi please 👏","Paisa vannu, ini plan venam 📒","King/Queen of the month 👑"
+  ];
+  const QUOTES = [
+    "Small savings, big dreams.","Discipline today, freedom tomorrow.","Consistency beats luck — but today, luck wins too.",
+    "Every dirham saved is a step forward.","Save like a trader: patient, steady, smart.","Great things grow from small, regular steps.",
+    "Money is a tool — use it wisely.","Your turn came because you stayed in the game.","Plan the spend before you spend the plan."
+  ];
+  const pick = arr => arr[randInt(arr.length)];
+  function roundTitle(r, total){
+    if (r === 1) return "Round 1 · Opening Bell";
+    if (r === total) return `Round ${r} · Grand Finale`;
+    if (r === total-1) return `Round ${r} · Semi-final`;
+    return `Round ${r} · Champion`;
+  }
+  let tickerTimer;
+  function ticker(on){
+    const el = $("#ticker"); clearInterval(tickerTimer);
+    if (!on){ el.textContent = remaining().length ? "Who will take the Kuri next? 🤔" : "Cycle complete — everyone got the Kuri! 🏆"; return; }
+    const show = () => { el.classList.add("fade"); setTimeout(()=>{ el.textContent = pick(TICKS); el.classList.remove("fade"); },250); };
+    show(); tickerTimer = setInterval(show, 1400);
+  }
+
+  // ---------- MUSIC ----------
+  const SONGS = Array.from({length:9},(_,i)=>`assets/music/song${String(i+1).padStart(2,"0")}.mp3`);
+  let bag = [], fadeTimer;
+  const bgm = new Audio(); bgm.loop = true; bgm.preload = "auto";
+  function nextSong(){
+    if (!bag.length){ bag = SONGS.slice(); for (let i=bag.length-1;i>0;i--){ const j=randInt(i+1); [bag[i],bag[j]]=[bag[j],bag[i]]; } }
+    return bag.pop();
+  }
+  function primeMusic(){ // called inside the click so mobile browsers allow playback later
+    bgm.src = nextSong(); bgm.muted = true;
+    const p = bgm.play(); if (p) p.then(()=>{ bgm.pause(); bgm.currentTime = 0; bgm.muted = false; }).catch(()=>{ bgm.muted = false; });
+  }
+  function fadeTo(v, ms, done){
+    clearInterval(fadeTimer); const steps = 20, from = bgm.volume, d = (v-from)/steps; let i = 0;
+    fadeTimer = setInterval(()=>{ i++; bgm.volume = Math.max(0,Math.min(1, from + d*i)); if (i>=steps){ clearInterval(fadeTimer); done && done(); } }, ms/steps);
+  }
+  function playMusic(){
+    if (!soundOn) { $("#musicBar").classList.add("paused"); $("#musicToggle").textContent="▶"; return; }
+    bgm.muted = false; bgm.volume = 0; bgm.currentTime = 0;
+    bgm.play().then(()=>{ fadeTo(.9, 800); $("#musicBar").classList.remove("paused"); $("#musicToggle").textContent="⏸"; })
+      .catch(()=>{ $("#musicBar").classList.add("paused"); $("#musicToggle").textContent="▶"; });
+  }
+  function stopMusic(){ fadeTo(0, 600, ()=>bgm.pause()); }
 
   // ---------- WHEEL ----------
   const cv = $("#wheel"), ctx = cv.getContext("2d"), R = cv.width/2;
@@ -366,16 +505,27 @@ dialog .btn-primary{width:auto;padding:12px 24px;margin:0}
       else ctx.fillStyle = (n%2===1 && i===n-1) ? SEG[2] : SEG[i%2 ? 1 : 0];
       ctx.fill();
       ctx.strokeStyle="rgba(8,225,134,.55)"; ctx.lineWidth=4; ctx.stroke();
-      // label
+      // avatar + label
       ctx.save(); ctx.rotate(st + a/2);
+      const avR = Math.max(34, Math.min(66, r*Math.sin(Math.min(a,Math.PI/2)/2)*0.5));
+      const ax = r - avR - 26;
+      ctx.save(); ctx.translate(ax,0); ctx.rotate(Math.PI/2);
+      ctx.beginPath(); ctx.arc(0,0,avR+6,0,Math.PI*2); ctx.fillStyle="#08E186"; ctx.fill();
+      ctx.beginPath(); ctx.arc(0,0,avR,0,Math.PI*2); ctx.closePath();
+      const im = imgs[list[i]];
+      if (im && im.ok){ ctx.save(); ctx.clip(); ctx.drawImage(im,-avR,-avR,avR*2,avR*2); ctx.restore(); }
+      else { ctx.fillStyle="#BEEBEA"; ctx.fill(); ctx.fillStyle="#021A1A"; ctx.textAlign="center"; ctx.textBaseline="middle";
+             ctx.font=`900 ${avR}px "Plus Jakarta Sans", Arial`; ctx.fillText(initials(list[i]),0,4); }
+      ctx.restore();
       ctx.textAlign="right"; ctx.textBaseline="middle";
-      const fs = Math.max(26, Math.min(54, 520/n + 8));
-      ctx.font = `800 ${fs}px "Plus Jakarta Sans", Arial, sans-serif`;
+      let fs = Math.max(24, Math.min(44, 440/n + 6));
+      const maxW = ax - avR - 20 - r*0.27;
+      do { ctx.font = `800 ${fs}px "Plus Jakarta Sans", Arial, sans-serif`; fs -= 2; } while (ctx.measureText(list[i]).width > maxW && fs > 24);
       ctx.fillStyle = i%2 ? "#BEEBEA" : "#F1F7F7";
-      let label = list[i]; const maxW = r*0.62;
+      ctx.shadowColor="rgba(0,0,0,.5)"; ctx.shadowBlur=8;
+      let label = list[i];
       while (ctx.measureText(label).width > maxW && label.length>3) label = label.slice(0,-2)+"…";
-      ctx.fillText(label, r-44, 0);
-      ctx.beginPath(); ctx.arc(r-22,0,7,0,Math.PI*2); ctx.fillStyle="#08E186"; ctx.fill();
+      ctx.fillText(label, ax - avR - 18, 0);
       ctx.restore();
     }
     ctx.restore();
@@ -419,6 +569,8 @@ dialog .btn-primary{width:auto;padding:12px 24px;margin:0}
     if (spinning || !list.length) return;
     spinning = true; setButtons();
     audio(); // unlock on gesture
+    primeMusic();
+    ticker(true);
     if ($("#suspense").checked) await countdown();
     const n = list.length, a = Math.PI*2/n;
     const win = randInt(n);
@@ -445,6 +597,7 @@ dialog .btn-primary{width:auto;padding:12px 24px;margin:0}
       requestAnimationFrame(frame);
     });
     $("#wheelWrap").classList.remove("spinning");
+    clearInterval(tickerTimer);
     angle = angle % (Math.PI*2);
     const winner = list[win];
     history.unshift({ name: winner, round: history.length+1, ts: Date.now() });
@@ -455,36 +608,68 @@ dialog .btn-primary{width:auto;padding:12px 24px;margin:0}
 
   function celebrate(name, round){
     $("#winName").textContent = name;
-    $("#winRound").textContent = `Round ${round} winner`;
-    const d = new Date();
-    $("#winMeta").textContent = `${fmtDate(d)} · ${remaining().length} member${remaining().length===1?"":"s"} left in the pot`;
+    $("#winPhoto").innerHTML = (imgs[name] && imgs[name].ok)
+      ? `<img src="${PHOTO_SRC(name)}" alt="${esc(name)}">` : `<div class="big-txt">${esc(initials(name))}</div>`;
+    $("#winTitle").textContent = roundTitle(round, names.length);
+    const left = remaining().length;
+    $("#winRound").textContent = left ? "This month's Kuri goes to" : "🏁 Last Kuri of the cycle goes to";
+    $("#winFun").textContent = pick(FUN);
+    $("#winQuote").textContent = `“${pick(QUOTES)}”`;
+    $("#winMeta").textContent = `${fmtDate(new Date())} · ${left} member${left===1?"":"s"} left in the pot`;
     $("#overlay").classList.remove("hidden");
-    fanfare(); confetti();
+    $("#overlay .win-card").scrollTop = 0;
+    fanfare(); festival(true);
+    setTimeout(playMusic, 700);
   }
-  $("#closeWin").onclick = () => { $("#overlay").classList.add("hidden"); spinning=false; render(); };
+  $("#closeWin").onclick = () => { $("#overlay").classList.add("hidden"); festival(false); stopMusic(); spinning=false; render(); ticker(false); };
+  $("#musicToggle").onclick = () => {
+    if (bgm.paused){ bgm.play().then(()=>{ fadeTo(.9,400); $("#musicBar").classList.remove("paused"); $("#musicToggle").textContent="⏸"; }).catch(()=>{}); }
+    else { bgm.pause(); $("#musicBar").classList.add("paused"); $("#musicToggle").textContent="▶"; }
+  };
+  $("#musicNext").onclick = () => { bgm.src = nextSong(); bgm.volume = 0; bgm.play().then(()=>{ fadeTo(.9,500); $("#musicBar").classList.remove("paused"); $("#musicToggle").textContent="⏸"; }).catch(()=>{}); };
   $("#shareBtn").onclick = () => {
     const h = history[0]; if(!h) return;
     copy(`🏆 Edge Kuri — Round ${h.round}\nThis month's Kuri goes to *${h.name}*! 🎉\n${fmtDate(new Date(h.ts))}\nRemaining: ${remaining().join(", ") || "none — cycle complete"}`, $("#shareBtn"));
   };
 
   // ---------- CONFETTI ----------
-  const cc = $("#confetti"), cx = cc.getContext("2d"); let parts=[], raf;
-  function confetti(){
+  const cc = $("#confetti"), cx = cc.getContext("2d"); let parts=[], raf, partyOn=false, boomTimer;
+  const COLS=["#08E186","#BEEBEA","#F1F7F7","#FFD166","#C6F2E1","#FF6B6B","#E9E3D5"];
+  function confettiBurst(x, y, count, power){
+    const dpr = devicePixelRatio;
+    for (let i=0;i<count;i++) parts.push({ kind:"c",
+      x, y, vx:(randFloat()-.5)*power*dpr, vy:(-randFloat()*power-6)*dpr,
+      s:(randFloat()*8+5)*dpr, r:randFloat()*6, vr:(randFloat()-.5)*.4, c:pick(COLS), life:0 });
+  }
+  function firework(){
+    const dpr = devicePixelRatio, x = cc.width*(.1+randFloat()*.8), y = cc.height*(.08+randFloat()*.35), c = pick(COLS), n = 46;
+    for (let i=0;i<n;i++){ const t=i/n*Math.PI*2, sp=(3+randFloat()*4)*dpr;
+      parts.push({ kind:"f", x, y, vx:Math.cos(t)*sp, vy:Math.sin(t)*sp, s:2.6*dpr, c, life:0, max:55+randInt(25) }); }
+    tone(120+randInt(60), .25, "sawtooth", .03);
+  }
+  function loop(){
+    cx.clearRect(0,0,cc.width,cc.height);
+    const dpr = devicePixelRatio;
+    parts.forEach(p=>{
+      p.life++;
+      if (p.kind==="c"){ p.vy+=.55*dpr; p.vx*=.99; p.x+=p.vx; p.y+=p.vy; p.r+=p.vr;
+        cx.save(); cx.translate(p.x,p.y); cx.rotate(p.r); cx.fillStyle=p.c; cx.fillRect(-p.s/2,-p.s/4,p.s,p.s/2); cx.restore(); }
+      else { p.vx*=.96; p.vy=p.vy*.96+.06*dpr; p.x+=p.vx; p.y+=p.vy;
+        cx.globalAlpha = Math.max(0, 1-p.life/p.max); cx.fillStyle=p.c;
+        cx.beginPath(); cx.arc(p.x,p.y,p.s,0,Math.PI*2); cx.fill(); cx.globalAlpha=1; }
+    });
+    parts = parts.filter(p=> p.kind==="c" ? (p.y<cc.height+50 && p.life<420) : p.life<p.max);
+    if (parts.length || partyOn) raf=requestAnimationFrame(loop); else { cx.clearRect(0,0,cc.width,cc.height); raf=null; }
+  }
+  function festival(on){
+    partyOn = on; clearInterval(boomTimer);
+    if (!on) return;
     cc.width = innerWidth*devicePixelRatio; cc.height = innerHeight*devicePixelRatio;
-    const cols=["#08E186","#BEEBEA","#F1F7F7","#03624C","#C6F2E1","#E9E3D5"];
-    parts = Array.from({length:220},()=>({
-      x: cc.width/2 + (randFloat()-.5)*cc.width*.3, y: cc.height*.45,
-      vx:(randFloat()-.5)*28*devicePixelRatio, vy:(-randFloat()*26-8)*devicePixelRatio,
-      s:(randFloat()*8+5)*devicePixelRatio, r:randFloat()*6, vr:(randFloat()-.5)*.4, c:cols[randInt(cols.length)], life:0
-    }));
-    cancelAnimationFrame(raf);
-    (function loop(){
-      cx.clearRect(0,0,cc.width,cc.height);
-      parts.forEach(p=>{ p.vy+=.55*devicePixelRatio; p.vx*=.99; p.x+=p.vx; p.y+=p.vy; p.r+=p.vr; p.life++;
-        cx.save(); cx.translate(p.x,p.y); cx.rotate(p.r); cx.fillStyle=p.c; cx.fillRect(-p.s/2,-p.s/4,p.s,p.s/2); cx.restore(); });
-      parts = parts.filter(p=>p.y<cc.height+50 && p.life<400);
-      if (parts.length) raf=requestAnimationFrame(loop); else cx.clearRect(0,0,cc.width,cc.height);
-    })();
+    confettiBurst(cc.width/2, cc.height*.45, 220, 28);
+    setTimeout(()=>{ confettiBurst(0, cc.height*.7, 90, 24); confettiBurst(cc.width, cc.height*.7, 90, 24); }, 500);
+    firework(); setTimeout(firework, 350);
+    boomTimer = setInterval(()=>{ firework(); if (randFloat()<.35) confettiBurst(cc.width*randFloat(), -10, 40, 6); }, 900);
+    if (!raf) raf = requestAnimationFrame(loop);
   }
 
   // ---------- UI ----------
@@ -504,10 +689,10 @@ dialog .btn-primary{width:auto;padding:12px 24px;margin:0}
     $("#prog").style.width = (names.length ? done/names.length*100 : 0) + "%";
     $("#chips").innerHTML = names.map(n=>{
       const w = history.find(h=>h.name===n);
-      return `<span class="chip ${w?"won":""}" title="${w?"Won round "+w.round:"In the pot"}"><span class="dot"></span>${esc(n)}${w?` <small>R${w.round}</small>`:""}</span>`;
+      return `<span class="chip ${w?"won":""}" title="${w?"Won round "+w.round:"In the pot"}">${avatarHTML(n)}${esc(n)}${w?` <small>R${w.round}</small>`:""}</span>`;
     }).join("");
     $("#hist").innerHTML = history.length ? history.map(h=>`
-      <li><span class="rn">${h.round}</span>
+      <li><span class="rn">${h.round}</span>${avatarHTML(h.name,"hav")}
         <span><div class="nm">${esc(h.name)}</div><div class="dt">${fmtDate(new Date(h.ts))}</div></span>
         <span class="lbl">Round ${h.round}</span></li>`).join("")
       : `<li class="empty" style="display:block;background:none;border:0">No draws yet. Spin to pick the first winner.</li>`;
@@ -526,7 +711,7 @@ dialog .btn-primary{width:auto;padding:12px 24px;margin:0}
   function init(){
     if (inited) return; inited = true;
     if (document.fonts) document.fonts.ready.then(draw);
-    setSoundBtn(); render();
+    loadPhotos(); setSoundBtn(); render(); ticker(false);
     $("#spinBtn").onclick = spin;
     $("#hub").onclick = spin;
     $("#hub").onkeydown = e => { if(e.key==="Enter"){ e.preventDefault(); spin(); } };
@@ -536,14 +721,14 @@ dialog .btn-primary{width:auto;padding:12px 24px;margin:0}
         if (!$("#overlay").classList.contains("hidden")) $("#closeWin").click(); else spin();
       }
     });
-    $("#soundBtn").onclick = () => { soundOn=!soundOn; store.set("edgekuri.sound",soundOn); setSoundBtn(); if(soundOn) tone(880,.1,"sine",.08); };
+    $("#soundBtn").onclick = () => { soundOn=!soundOn; store.set(V+"sound",soundOn); setSoundBtn(); if(soundOn) tone(880,.1,"sine",.08); else bgm.pause(); };
     $("#undoBtn").onclick = () => {
       if (spinning || !history.length) return;
-      if (confirm(`Undo round ${history[0].round} (${history[0].name})? They go back into the pot.`)){ history.shift(); save(); render(); }
+      if (confirm(`Undo round ${history[0].round} (${history[0].name})? They go back into the pot.`)){ history.shift(); save(); render(); ticker(false); }
     };
     $("#resetBtn").onclick = () => {
       if (spinning) return;
-      if (confirm("Start a new Kuri cycle? All winners return to the pot and history is cleared.\n\nTip: tap Copy first to keep a record.")){ history=[]; save(); render(); }
+      if (confirm("Start a new Kuri cycle? All winners return to the pot and history is cleared.\n\nTip: tap Copy first to keep a record.")){ history=[]; save(); render(); ticker(false); }
     };
     $("#exportBtn").onclick = () => {
       const lines = [...history].reverse().map(h=>`Round ${h.round}: ${h.name} — ${fmtDate(new Date(h.ts))}`);
@@ -555,7 +740,7 @@ dialog .btn-primary{width:auto;padding:12px 24px;margin:0}
       const list = [...new Set($("#namesTxt").value.split("\n").map(s=>s.trim()).filter(Boolean))];
       if (list.length < 2){ alert("Add at least two members."); return; }
       const same = list.length===names.length && list.every((n,i)=>n===names[i]);
-      if (!same){ names = list; history = []; angle = 0; save(); render(); }
+      if (!same){ names = list; history = []; angle = 0; save(); loadPhotos(); render(); ticker(false); }
       $("#namesDlg").close();
     };
     addEventListener("resize", draw);
