@@ -4,12 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#E4ECEB">
 <title>Edge Kuri Draw</title>
 <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,700..900&family=Plus+Jakarta+Sans:wght@400..800&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/jakarta.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+@font-face{font-family:"Archivo";src:url(assets/fonts/archivo.woff2) format("woff2");font-weight:100 900;font-stretch:62% 125%;font-display:swap}
+@font-face{font-family:"Plus Jakarta Sans";src:url(assets/fonts/jakarta.woff2) format("woff2");font-weight:200 800;font-display:swap}
 :root{
   --green:#08E186;--emerald:#03624C;--ink:#021A1A;--pine:#0C3B40;
   --off:#F1F7F7;--mint:#BEEBEA;--pill:#C6F2E1;--sand:#E9E3D5;--coral:#FF6B6B;
@@ -232,6 +234,120 @@ dialog .btn-primary{width:auto;padding:12px 24px;margin:0}
   .hide-sm{display:none}
 }
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important}}
+
+/* ================= GLASS + 3D THEME ================= */
+:root{--txt:#141922;--mute:#5E6773;--glass:rgba(255,255,255,.58);--glass-b:rgba(255,255,255,.9);
+  --sh:0 24px 60px rgba(30,40,60,.16),0 4px 14px rgba(30,40,60,.08);--sh-sm:0 8px 22px rgba(30,40,60,.12);
+  --condensed:"Archivo","Arial Narrow","Arial Black",sans-serif}
+html{background:#D9DFE7}
+body{min-height:100vh;color:var(--txt);background:radial-gradient(1200px 800px at 50% -10%,#FFFFFF 0%,#EDF1F5 45%,#D9DFE7 100%) fixed}
+body::before{display:none}
+.eyebrow{color:#03624C}
+.poster{font-family:var(--condensed);font-stretch:68%;font-weight:900;text-transform:uppercase;letter-spacing:-.01em;
+  line-height:.9;color:var(--txt);font-size:clamp(46px,8.4vw,104px);text-shadow:0 2px 0 rgba(255,255,255,.8)}
+.poster span{color:#08C97A}
+.poster-sub{font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#2A303A;font-size:clamp(15px,2.2vw,26px);margin-top:6px}
+.glassy,.card,.login-card,.win-card,dialog,.stat{background:var(--glass);-webkit-backdrop-filter:blur(18px) saturate(1.3);backdrop-filter:blur(18px) saturate(1.3);
+  border:1px solid var(--glass-b);box-shadow:var(--sh)}
+/* login */
+#login{background:none}
+.login-card{max-width:440px;text-align:center}
+.login-card img{margin:0 auto 22px;height:38px}
+.login-card .poster{font-size:64px}
+.login-card .poster-sub{font-size:16px;margin-bottom:6px}
+.login-card p.sub{color:var(--mute);margin-bottom:22px}
+.field{text-align:left}
+.field label{color:var(--mute)}
+.field input{background:rgba(255,255,255,.75);border:1px solid rgba(20,25,34,.08);color:var(--txt);box-shadow:inset 0 2px 6px rgba(30,40,60,.08)}
+.field input:focus{border-color:#08C97A;box-shadow:0 0 0 4px rgba(8,225,134,.18)}
+.pw button{color:var(--mute)}
+.err{color:#D94848}
+.btn-primary,.btn-spin{background:linear-gradient(180deg,#3A414C,#141922);color:#fff;border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 14px 30px rgba(20,25,34,.35),inset 0 1px 0 rgba(255,255,255,.25)}
+.btn-primary:hover,.btn-spin:hover:not(:disabled){box-shadow:0 18px 40px rgba(20,25,34,.4),0 0 0 4px rgba(8,225,134,.25),inset 0 1px 0 rgba(255,255,255,.25)}
+.btn-spin{padding:20px 52px}
+/* header */
+.icon-btn{background:var(--glass);border:1px solid var(--glass-b);color:var(--txt);box-shadow:var(--sh-sm);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.icon-btn:hover{background:#fff;border-color:#fff}
+.hero{justify-content:center;text-align:center;margin:6px 0 10px}
+.hero .eyebrow{display:block;margin-bottom:12px}
+.stats{display:none}
+.grid{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);align-items:start}
+/* wheel stage: no card, floats on page */
+.grid>section.card:first-child{background:none;border:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;padding:40px 10px 10px}
+.wheel-wrap{max-width:560px}
+.wheel-wrap canvas{position:relative;z-index:2;box-shadow:0 30px 60px rgba(30,40,60,.25),0 0 0 1px rgba(255,255,255,.7)}
+.wheel-wrap.spinning canvas{box-shadow:0 30px 60px rgba(30,40,60,.25),0 0 50px 8px rgba(8,225,134,.35)}
+.floor{position:absolute;left:12%;right:12%;bottom:-46px;height:40px;border-radius:50%;z-index:0;
+  background:radial-gradient(closest-side,rgba(30,40,60,.28),transparent)}
+.tcard{position:absolute;z-index:1;width:30%;aspect-ratio:3/4;border-radius:22px;top:-6%;padding:16px 14px;
+  background:linear-gradient(160deg,rgba(255,255,255,.75),rgba(255,255,255,.35));border:1px solid rgba(255,255,255,.95);
+  box-shadow:0 18px 40px rgba(30,40,60,.14);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  display:flex;flex-direction:column;gap:2px;color:#2A303A}
+.tcard.tl{left:-8%;transform:rotate(-12deg)}
+.tcard.tr{right:-8%;transform:rotate(12deg);align-items:flex-end;text-align:right}
+.tcard small{font-weight:800;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.tcard b{font-family:var(--condensed);font-stretch:68%;font-weight:900;font-size:clamp(30px,5vw,54px);line-height:1;color:var(--txt)}
+.tcard em{font-style:normal;font-family:var(--condensed);font-stretch:68%;font-weight:900;font-size:clamp(14px,2.2vw,22px);color:rgba(20,25,34,.35);letter-spacing:.04em}
+.pointer{width:52px;height:74px;top:-34px;filter:drop-shadow(0 8px 10px rgba(0,0,0,.35));z-index:4}
+.hub{width:22%;height:22%;border:0;z-index:3;color:#3A414C;font-family:var(--condensed);font-stretch:68%;
+  background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.0) 55%,rgba(0,0,0,.08) 70%),
+    conic-gradient(from 20deg,#F7F8FA,#A9AFB6,#EEF0F3,#8C939B,#F7F8FA,#B4BAC1,#F2F4F6,#9AA1A9,#F7F8FA);
+  box-shadow:0 0 0 7px rgba(255,255,255,.85),0 0 0 8px rgba(30,40,60,.12),0 14px 30px rgba(20,25,34,.35),inset 0 2px 3px rgba(255,255,255,.9),inset 0 -3px 6px rgba(0,0,0,.18);
+  text-shadow:0 1px 0 rgba(255,255,255,.8)}
+.hub:hover{transform:scale(1.05);box-shadow:0 0 0 7px rgba(255,255,255,.9),0 0 0 10px rgba(8,225,134,.45),0 14px 30px rgba(20,25,34,.35)}
+.hub small{color:#5E6773}
+.ticker{color:#03624C;margin-top:22px}
+.hint{color:var(--mute)}.hint kbd{background:#fff;color:var(--txt);box-shadow:var(--sh-sm)}
+.spin-row{margin-top:44px}
+.done-banner{background:rgba(255,255,255,.6);border:1px dashed #08C97A;color:#03624C}
+/* side cards */
+.card h3{color:var(--mute)}
+#memCount{color:#03624C!important}
+.chip{background:rgba(255,255,255,.85);border:1px solid #fff;color:var(--txt);box-shadow:0 4px 12px rgba(30,40,60,.08)}
+.chip .av{border-color:#fff}
+.chip.won{background:rgba(255,255,255,.35);color:#9AA2AC;box-shadow:none;border:1px dashed rgba(20,25,34,.15)}
+.progress{background:rgba(20,25,34,.08)}
+.progress i{background:linear-gradient(90deg,#3A414C,#08C97A)}
+.switch span{background:rgba(20,25,34,.15)}
+.switch span::after{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.switch input:checked+span{background:#141922}
+.switch input:checked+span::after{background:#08E186}
+.mode{color:var(--mute)}
+.hist li{background:rgba(255,255,255,.7);border:1px solid #fff;box-shadow:0 4px 12px rgba(30,40,60,.06)}
+.hist li:first-child{background:#fff;border-color:#fff;box-shadow:0 10px 24px rgba(30,40,60,.12),inset 4px 0 0 #08C97A}
+.hist .rn{background:linear-gradient(180deg,#3A414C,#141922);color:#fff}
+.hist .nm{color:var(--txt)}.hist .dt{color:var(--mute)}.hist .lbl{color:#03624C}
+.hist .hav{border-color:#fff;box-shadow:var(--sh-sm)}
+.empty{color:var(--mute)}
+.hist li.empty,.hist li.empty:first-child{background:none;border:0;box-shadow:none}
+.mini{color:var(--mute)}.mini:hover{color:#03624C;background:rgba(8,225,134,.1)}
+footer{color:var(--mute)}footer a{color:#03624C}
+/* winner */
+#overlay{background:rgba(226,232,239,.62)}
+.win-card{background:rgba(255,255,255,.72);box-shadow:0 40px 100px rgba(20,25,34,.3),0 0 0 1px #fff}
+.rays{opacity:.6;background:repeating-conic-gradient(from 0deg,rgba(20,25,34,.06) 0 8deg,transparent 8deg 20deg)}
+.lights::before{border-bottom-color:rgba(20,25,34,.25)}
+.photo-ring{background:conic-gradient(#F7F8FA,#A9AFB6,#EEF0F3,#8C939B,#F7F8FA,#B4BAC1,#F7F8FA);box-shadow:0 20px 44px rgba(20,25,34,.3),0 0 40px rgba(8,225,134,.35)}
+.photo-ring img,.photo-ring .big-txt{border-color:#fff}
+.big-txt{background:#E3E8EE;color:var(--txt)}
+.win-title{background:linear-gradient(180deg,#3A414C,#141922);color:#fff;border:0}
+.win-card .eyebrow{color:var(--mute)}
+.win-name{font-family:var(--condensed);font-stretch:68%;color:var(--txt);font-size:clamp(56px,13vw,110px);text-shadow:0 3px 0 rgba(255,255,255,.9),0 0 34px rgba(8,225,134,.45)}
+.win-fun{color:var(--txt)}.win-quote{color:#03624C}.win-meta{color:var(--mute)}
+.music-bar{background:rgba(255,255,255,.8);border:1px solid #fff;color:#03624C;box-shadow:var(--sh-sm)}
+.music-bar button{background:#EEF1F5;color:var(--txt)}
+.music-bar button:hover{background:#08E186}
+.btn-ghost{background:rgba(255,255,255,.85);border:1px solid #fff;color:var(--txt);box-shadow:var(--sh-sm)}
+.btn-ghost:hover{color:#03624C;border-color:#fff}
+#countdown span{font-family:var(--condensed);font-stretch:68%;color:var(--txt);text-shadow:0 6px 0 rgba(255,255,255,.9),0 0 60px rgba(8,225,134,.55)}
+dialog{color:var(--txt)}
+dialog::backdrop{background:rgba(226,232,239,.6)}
+dialog p{color:var(--mute)}
+dialog textarea{background:rgba(255,255,255,.8);border:1px solid #fff;color:var(--txt)}
+@media(max-width:900px){.grid{grid-template-columns:1fr}.grid>section.card:first-child{padding:44px 0 6px}.wheel-wrap{max-width:440px}}
+@media(max-width:520px){.tcard.tl{left:-1%}.tcard.tr{right:-1%}.tcard{top:-9%;width:26%;padding:10px;border-radius:16px}.tcard small{font-size:9px}.pointer{width:40px;height:58px;top:-26px}
+  .btn-spin{padding:16px 36px}}
 </style>
 </head>
 <body>
@@ -239,9 +355,10 @@ dialog .btn-primary{width:auto;padding:12px 24px;margin:0}
 <!-- LOGIN -->
 <section id="login">
   <form class="login-card" id="loginForm" autocomplete="on">
-    <img src="assets/logo.svg" alt="Edge Trading Academy">
+    <img src="assets/logo-light.svg" alt="Edge Trading Academy">
     <span class="eyebrow">Members only</span>
-    <h1 class="display">Edge <span>Kuri</span></h1>
+    <h1 class="poster">Edge Kuri</h1>
+    <p class="poster-sub">Let the wheel decide</p>
     <p class="sub">Sign in to open the monthly chitti draw.</p>
     <div class="field">
       <label for="u">Username</label>
@@ -262,7 +379,7 @@ dialog .btn-primary{width:auto;padding:12px 24px;margin:0}
 <!-- APP -->
 <main id="app" class="hidden">
   <header>
-    <img src="assets/logo.svg" alt="Edge Trading Academy">
+    <img src="assets/logo-light.svg" alt="Edge Trading Academy">
     <div class="hdr-actions">
       <button class="icon-btn" id="soundBtn" title="Sound on/off">🔊<span class="hide-sm"> Sound</span></button>
       <button class="icon-btn" id="namesBtn">✏️<span class="hide-sm"> Members</span></button>
@@ -272,8 +389,9 @@ dialog .btn-primary{width:auto;padding:12px 24px;margin:0}
 
   <div class="hero">
     <div>
-      <span class="eyebrow">Monthly chitti draw</span>
-      <h1 class="display" style="margin-top:10px">Edge <span>Kuri</span></h1>
+      <span class="eyebrow">Edge Kuri · Monthly chitti draw</span>
+      <h1 class="poster">Who gets the Kuri<span>?</span></h1>
+      <p class="poster-sub">Let the wheel decide</p>
     </div>
     <div class="stats">
       <div class="stat"><b id="sRound">1</b><small>Round</small></div>
@@ -285,9 +403,17 @@ dialog .btn-primary{width:auto;padding:12px 24px;margin:0}
   <div class="grid">
     <section class="card">
       <div class="wheel-wrap" id="wheelWrap">
-        <svg class="pointer" id="pointer" viewBox="0 0 44 56" aria-hidden="true">
-          <path d="M22 54 L4 14 A20 20 0 1 1 40 14 Z" fill="#08E186" stroke="#021A1A" stroke-width="3"/>
-          <circle cx="22" cy="18" r="7" fill="#021A1A"/>
+        <div class="tcard tl"><small>Round</small><b id="tRound">1</b><em>KURI</em></div>
+        <div class="tcard tr"><small>In the pot</small><b id="tLeft">10</b><em>LEFT</em></div>
+        <div class="floor"></div>
+        <svg class="pointer" id="pointer" viewBox="0 0 60 84" aria-hidden="true">
+          <defs>
+            <linearGradient id="pinBody" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6B7380"/><stop offset=".5" stop-color="#3A414C"/><stop offset="1" stop-color="#1F242C"/></linearGradient>
+            <radialGradient id="pinBall" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".45" stop-color="#C9CED4"/><stop offset="1" stop-color="#7E858E"/></radialGradient>
+          </defs>
+          <rect x="12" y="0" width="36" height="16" rx="6" fill="#2B3039"/>
+          <path d="M30 82 C24 64 6 50 6 32 A24 24 0 0 1 54 32 C54 50 36 64 30 82 Z" fill="url(#pinBody)" stroke="rgba(255,255,255,.35)" stroke-width="1.5"/>
+          <circle cx="30" cy="31" r="12" fill="url(#pinBall)"/>
         </svg>
         <canvas id="wheel" width="1040" height="1040" aria-label="Draw wheel"></canvas>
         <div class="hub" id="hub" role="button" tabindex="0" aria-label="Spin">SPIN<small>TAP ME</small></div>
@@ -484,54 +610,68 @@ dialog .btn-primary{width:auto;padding:12px 24px;margin:0}
 
   // ---------- WHEEL ----------
   const cv = $("#wheel"), ctx = cv.getContext("2d"), R = cv.width/2;
-  const SEG = ["#03624C","#0C3B40","#021A1A","#0A4F44"];
+  const PAL = [
+    ["#1E2532","#3D4658",1],["#FDE6C2","#F1B57E",0],["#D7ECFB","#7DB4E6",0],["#232932","#3A414E",1],
+    ["#A3A9C6","#5D6388",1],["#2F5D6F","#4F8B9A",1],["#F7CDB6","#B7A5E2",0],["#C8E8BC","#4B8C59",0],
+    ["#03624C","#09B06C",1],["#EFE7D6","#CBB98F",0]];
   function draw(){
     const list = remaining();
     ctx.clearRect(0,0,cv.width,cv.height);
     ctx.save(); ctx.translate(R,R);
-    // rim
-    ctx.beginPath(); ctx.arc(0,0,R,0,Math.PI*2); ctx.fillStyle="#021A1A"; ctx.fill();
-    const r = R-18;
+    const rim = 44, r = R - rim;
+    // frosted glass rim
+    ctx.beginPath(); ctx.arc(0,0,R-3,0,Math.PI*2);
+    const g = ctx.createLinearGradient(-R,-R,R,R);
+    g.addColorStop(0,"rgba(255,255,255,.95)"); g.addColorStop(.45,"rgba(214,222,232,.75)"); g.addColorStop(1,"rgba(255,255,255,.9)");
+    ctx.fillStyle = g; ctx.fill();
+    ctx.lineWidth = 3; ctx.strokeStyle = "rgba(255,255,255,1)"; ctx.stroke();
+    ctx.beginPath(); ctx.arc(0,0,r+6,0,Math.PI*2); ctx.fillStyle = "rgba(40,48,62,.22)"; ctx.fill();
+    ctx.beginPath(); ctx.arc(0,0,r+2,0,Math.PI*2); ctx.fillStyle = "rgba(255,255,255,.9)"; ctx.fill();
     if (!list.length){
-      ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2); ctx.fillStyle="#0C3B40"; ctx.fill();
-      ctx.restore(); return;
+      ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2); ctx.fillStyle="#E3E8EE"; ctx.fill(); ctx.restore(); return;
     }
     const n = list.length, a = Math.PI*2/n;
-    ctx.rotate(angle);
+    ctx.save(); ctx.rotate(angle);
     for (let i=0;i<n;i++){
-      const st = -Math.PI/2 + i*a;
+      const st = -Math.PI/2 + i*a, mid = st + a/2;
+      let c = PAL[i % PAL.length];
+      if (n > 1 && i === n-1 && (i % PAL.length) === 0) c = PAL[4];
+      const gr = ctx.createLinearGradient(0,0,Math.cos(mid)*r,Math.sin(mid)*r);
+      gr.addColorStop(0, c[1]); gr.addColorStop(1, c[0]);
       ctx.beginPath(); ctx.moveTo(0,0); ctx.arc(0,0,r,st,st+a); ctx.closePath();
-      if (n===1){ ctx.fillStyle="#03624C"; }
-      else ctx.fillStyle = (n%2===1 && i===n-1) ? SEG[2] : SEG[i%2 ? 1 : 0];
-      ctx.fill();
-      ctx.strokeStyle="rgba(8,225,134,.55)"; ctx.lineWidth=4; ctx.stroke();
-      // avatar + label
-      ctx.save(); ctx.rotate(st + a/2);
-      const avR = Math.max(34, Math.min(66, r*Math.sin(Math.min(a,Math.PI/2)/2)*0.5));
-      const ax = r - avR - 26;
-      ctx.save(); ctx.translate(ax,0); ctx.rotate(Math.PI/2);
-      ctx.beginPath(); ctx.arc(0,0,avR+6,0,Math.PI*2); ctx.fillStyle="#08E186"; ctx.fill();
+      ctx.fillStyle = gr; ctx.fill();
+      ctx.lineWidth = 3; ctx.strokeStyle = "rgba(255,255,255,.55)"; ctx.stroke();
+      // upright photo + name pill
+      const avR = Math.max(34, Math.min(70, r*Math.sin(Math.min(a,Math.PI/2)/2)*0.66*0.62));
+      const dist = n === 1 ? 0 : r*0.66;
+      ctx.save(); ctx.translate(Math.cos(mid)*dist, Math.sin(mid)*dist); ctx.rotate(-angle);
+      ctx.shadowColor = "rgba(10,14,20,.38)"; ctx.shadowBlur = 20; ctx.shadowOffsetY = 9;
+      ctx.beginPath(); ctx.arc(0,0,avR+6,0,Math.PI*2); ctx.fillStyle = "#FFFFFF"; ctx.fill();
+      ctx.shadowColor = "transparent"; ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
       ctx.beginPath(); ctx.arc(0,0,avR,0,Math.PI*2); ctx.closePath();
       const im = imgs[list[i]];
       if (im && im.ok){ ctx.save(); ctx.clip(); ctx.drawImage(im,-avR,-avR,avR*2,avR*2); ctx.restore(); }
-      else { ctx.fillStyle="#BEEBEA"; ctx.fill(); ctx.fillStyle="#021A1A"; ctx.textAlign="center"; ctx.textBaseline="middle";
-             ctx.font=`900 ${avR}px "Plus Jakarta Sans", Arial`; ctx.fillText(initials(list[i]),0,4); }
-      ctx.restore();
-      ctx.textAlign="right"; ctx.textBaseline="middle";
-      let fs = Math.max(24, Math.min(44, 440/n + 6));
-      const maxW = ax - avR - 20 - r*0.27;
-      do { ctx.font = `800 ${fs}px "Plus Jakarta Sans", Arial, sans-serif`; fs -= 2; } while (ctx.measureText(list[i]).width > maxW && fs > 24);
-      ctx.fillStyle = i%2 ? "#BEEBEA" : "#F1F7F7";
-      ctx.shadowColor="rgba(0,0,0,.5)"; ctx.shadowBlur=8;
-      let label = list[i];
-      while (ctx.measureText(label).width > maxW && label.length>3) label = label.slice(0,-2)+"…";
-      ctx.fillText(label, ax - avR - 18, 0);
+      else { ctx.fillStyle = "#E3E8EE"; ctx.fill(); ctx.fillStyle = "#1E2532"; ctx.textAlign="center"; ctx.textBaseline="middle";
+             ctx.font = `900 ${avR}px "Plus Jakarta Sans", Arial`; ctx.fillText(initials(list[i]),0,4); }
+      let fs = Math.max(17, Math.min(26, 240/n + 4));
+      ctx.font = `800 ${fs}px "Plus Jakarta Sans", Arial, sans-serif`;
+      let label = list[i]; while (ctx.measureText(label).width > avR*2.3 && label.length > 3) label = label.slice(0,-2)+"…";
+      const tw = ctx.measureText(label).width + fs*1.1, th = fs*1.55, ty = avR + 2;
+      ctx.shadowColor = "rgba(10,14,20,.3)"; ctx.shadowBlur = 10; ctx.shadowOffsetY = 4;
+      ctx.beginPath(); ctx.roundRect ? ctx.roundRect(-tw/2, ty-th/2, tw, th, th/2) : ctx.rect(-tw/2, ty-th/2, tw, th);
+      ctx.fillStyle = c[2] ? "#FFFFFF" : "#141922"; ctx.fill();
+      ctx.shadowColor = "transparent"; ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
+      ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      ctx.fillStyle = c[2] ? "#141922" : "#FFFFFF";
+      ctx.fillText(label, 0, ty + 1);
       ctx.restore();
     }
     ctx.restore();
-    // outer studs
-    ctx.save(); ctx.translate(R,R);
-    for (let i=0;i<36;i++){ const t=i*Math.PI*2/36; ctx.beginPath(); ctx.arc(Math.cos(t)*(R-9),Math.sin(t)*(R-9),4,0,Math.PI*2); ctx.fillStyle=i%2?"#08E186":"#BEEBEA"; ctx.globalAlpha=.8; ctx.fill(); }
+    // glass gloss over the face
+    ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2);
+    const gl = ctx.createLinearGradient(-r,-r,r*.2,r*.2);
+    gl.addColorStop(0,"rgba(255,255,255,.30)"); gl.addColorStop(.55,"rgba(255,255,255,0)");
+    ctx.fillStyle = gl; ctx.fill();
     ctx.restore();
   }
 
@@ -683,6 +823,7 @@ dialog .btn-primary{width:auto;padding:12px 24px;margin:0}
   function render(){
     const left = remaining(), done = names.length - left.length;
     $("#sRound").textContent = Math.min(history.length+1, names.length);
+    $("#tRound").textContent = Math.min(history.length+1, names.length); $("#tLeft").textContent = left.length;
     $("#sLeft").textContent = left.length;
     $("#sWon").textContent = done;
     $("#memCount").textContent = `${done}/${names.length}`;
